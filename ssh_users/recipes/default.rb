@@ -15,13 +15,13 @@ node[:ssh_users].each_key do |id|
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
       rename_user(existing_ssh_users[id], node[:ssh_users][id][:name])
       #added in to set the new users to the groups we want
-      add_user_to_groups(node[:ssh_users][id])
+      add_user_to_default_groups(node[:ssh_users][id])
     end
   else
     node.set[:ssh_users][id][:uid] = id
     setup_user(node[:ssh_users][id])
     #added in to set the new users to the groups we want
-    add_user_to_groups(node[:ssh_users][id])
+    add_user_to_default_groups(node[:ssh_users][id])
   end
   set_public_key(node[:ssh_users][id])
 end
