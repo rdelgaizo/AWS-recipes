@@ -1,5 +1,8 @@
 group 'opsworks'
 
+#added into create the new group we need
+create_weddingwire_ng_group
+
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
@@ -11,10 +14,14 @@ node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
       rename_user(existing_ssh_users[id], node[:ssh_users][id][:name])
+      #added in to set the new users to the groups we want
+      add_user_to_groups(node[:ssh_users][id])
     end
   else
     node.set[:ssh_users][id][:uid] = id
     setup_user(node[:ssh_users][id])
+    #added in to set the new users to the groups we want
+    add_user_to_groups(node[:ssh_users][id])
   end
   set_public_key(node[:ssh_users][id])
 end
