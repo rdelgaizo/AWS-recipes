@@ -35,7 +35,6 @@ module OpsWorks
           comment "OpsWorks user #{params[:name]}"
           uid params[:uid]
           gid 'opsworks'
-          gid 'www-data'
           home "/home/#{params[:name]}"
           supports :manage_home => true
           shell '/bin/bash'
@@ -46,7 +45,13 @@ module OpsWorks
           group 'opsworks'
           mode 0700
         end
-
+        
+        group "www-data" do
+          action :modify
+          members params[:name]
+          append true
+        end
+        
         set_public_key(params)
       end
     end
