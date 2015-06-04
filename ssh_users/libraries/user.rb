@@ -46,11 +46,11 @@ module OpsWorks
           mode 0700
         end
         
-        group "www-data" do
-          action :modify
-          members params[:name]
-          append true
-        end
+       # group "www-data" do
+      #    action :modify
+      #    members params[:name]
+      #    append true
+      #  end
         
         set_public_key(params)
       end
