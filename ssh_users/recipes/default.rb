@@ -26,7 +26,7 @@ node[:ssh_users].each_key do |id|
     #added in to set the new users to the groups we want
     add_user_to_default_groups(node[:ssh_users][new_id])
   end
-  set_public_key(node[:ssh_users][new_id])
+  set_public_key(node[:ssh_users][id])
 end
 
 system_sudoer = case node[:platform]
