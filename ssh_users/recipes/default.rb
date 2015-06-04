@@ -18,6 +18,7 @@ node[:ssh_users].each_key do |id|
       add_user_to_default_groups(node[:ssh_users][id])
     end
   else
+    Chef::Log.info("Setting up new user with id #{id}")
     node.set[:ssh_users][id][:uid] = id
     setup_user(node[:ssh_users][id])
     #added in to set the new users to the groups we want
