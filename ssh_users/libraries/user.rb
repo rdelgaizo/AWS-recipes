@@ -24,6 +24,7 @@ module OpsWorks
 
     def setup_user(params)
       existing_users = load_existing_users
+      Chef::Log.info("The value of params is:  #{params.inspect}")
       if existing_users.has_key?(params[:uid])
         Chef::Log.info("UID #{params[:uid]} is taken, not setting up user #{params[:name]}")
       elsif existing_users.has_value?(params[:name])
