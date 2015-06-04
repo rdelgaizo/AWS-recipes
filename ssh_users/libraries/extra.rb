@@ -2,7 +2,7 @@ module OpsWorks
   module User
     @@allocated_uids = []
 
-    def create_weddingwire-ng
+    def create_weddingwire_ng_group
       group 'weddingwire-ng' do
         action :create
     end
