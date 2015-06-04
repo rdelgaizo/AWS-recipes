@@ -97,6 +97,7 @@ module OpsWorks
     end
 
     def next_free_uid(starting_from = 4000)
+      Chef::Log.info("Setting up uid")
       candidate = starting_from
       existing_uids = @@allocated_uids
       (node[:passwd] || node[:etc][:passwd]).each do |username, entry|
@@ -105,6 +106,7 @@ module OpsWorks
       while existing_uids.include?(candidate) do
         candidate += 1
       end
+      Chef::Log.info("Uid found as #{candidate}")
       @@allocated_uids << candidate
       candidate
     end
