@@ -10,9 +10,9 @@ describe_recipe 'ssh_users::default' do
     group('opsworks').must_exist
   end
   
-  it 'creates weddingwire-ng group' do
-    group('weddingwire-ng').must_exit
-  end
+  #it 'creates weddingwire-ng group' do
+  #  group('weddingwire-ng').must_exit
+  #end
   
   it 'sets up sudoers file' do
     file(sudoers_file).must_exist.with(:owner, 'root').and(:group, 'root').and(:mode, '440')
