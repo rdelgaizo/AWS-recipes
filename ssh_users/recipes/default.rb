@@ -13,13 +13,13 @@ end
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
-      new_id = next_free_uid
+      new_id = next_free_uid + 2000
       rename_user(existing_ssh_users[id], node[:ssh_users][new_id][:name])
       #added in to set the new users to the groups we want
       add_user_to_default_groups(node[:ssh_users][id])
     end
   else
-    new_id = next_free_uid
+    new_id = next_free_uid + 2000
     Chef::Log.info("Setting up new user with id #{new_id}")
     node.set[:ssh_users][id][:uid] = new_id
     setup_user(node[:ssh_users][id])
