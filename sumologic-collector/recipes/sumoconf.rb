@@ -33,6 +33,7 @@ credentials = {}
 
 if node[:sumologic][:credentials]
   creds = node[:sumologic][:credentials]
+  Chef::Log.info "In Sumo conf with creds = #{creds.inspect}"
 
   if creds[:secret_file]
     secret = Chef::EncryptedDataBagItem.load_secret(creds[:secret_file]) 
