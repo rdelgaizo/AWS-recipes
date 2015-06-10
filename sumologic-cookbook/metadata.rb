@@ -14,4 +14,8 @@ attribute 'sumologic/credentials/item_name',
   :type => "string",
   :required => "required"
 
+depends 'sumologic-collector'
+
+recipe 'sumologic', 'Installs Sumo Logic collector, and provides resources for forwarding logs to sumologic'
+
 #depends 'java'
