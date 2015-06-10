@@ -33,7 +33,7 @@ credentials = {}
 
 if node[:sumologic][:credentials]
   creds = node[:sumologic][:credentials]
-  Chef::Log.info "In Sumo conf with creds = #{creds.inspect}"
+  Chef::Log.info "Loaded credentials"
 
   if creds[:secret_file]
     secret = Chef::EncryptedDataBagItem.load_secret(creds[:secret_file]) 
@@ -60,8 +60,12 @@ directory ::File.dirname(node['sumologic']['sumo_conf_path']) do
   recursive true
 end
 
+Chef::Log.info "Checked/created conf file"
+
 template node['sumologic']['sumo_conf_path'] do
+  Chef::Log.info "Setting cookbook node"
   cookbook node['sumologic']['conf_config_cookbook']
+  Chef::Log.info "Set cookbook node"
   source conf_source
 
   unless platform?('windows')
@@ -77,4 +81,5 @@ template node['sumologic']['sumo_conf_path'] do
     :email     => credentials[:email],
     :password  => credentials[:password],
   })
+  Chef::Log.info "Finished in sumoconf"
 end
