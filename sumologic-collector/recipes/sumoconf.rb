@@ -41,6 +41,7 @@ if node[:sumologic][:credentials]
     bag = Chef::EncryptedDataBagItem.load(creds[:bag_name], creds[:item_name], secret)
     Chef::Log.info "secret is #{secret.inspect} and bag is #{bag}"
   else
+    Chef::Log.info "bag name is #{creds[:bag_name].inspect} and item name is #{creds[:item_name].inspect}"
     bag = data_bag_item(creds[:bag_name], creds[:item_name])
     Chef::Log.info "Creds secret_file didn't exist bag is now #{bag.inspect}"
   end
