@@ -42,9 +42,11 @@ else
     Chef::Log.info "Installing Sumo Logic Collector..."
     include_recipe 'sumologic-collector::sumoconf'
 	if node['sumologic']['use_json_path_dir'] == true 
+		Chef::Log.info "Using jsondir"
 		# use the recipe sumojsondir if your source configurations are in a directory 
 		include_recipe 'sumologic-collector::sumojsondir'
 	else
+		Chef::Log.info "Using just json"
 		# use the recipe sumojson if your source configurations are in a single json file
 		include_recipe 'sumologic-collector::sumojson'
 	end
