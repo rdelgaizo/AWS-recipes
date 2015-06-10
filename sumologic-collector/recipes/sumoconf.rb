@@ -36,13 +36,17 @@ if node[:sumologic][:credentials]
   Chef::Log.info "Loaded credentials"
 
   if creds[:secret_file]
+    Chef::Log.info "Creds secret_file existed"
     secret = Chef::EncryptedDataBagItem.load_secret(creds[:secret_file]) 
     bag = Chef::EncryptedDataBagItem.load(creds[:bag_name], creds[:item_name], secret)
+    Chef::Log.info "secret is #{secret.inspect} and bag is #{bag}"
   else
     bag = data_bag_item(creds[:bag_name], creds[:item_name])
+    Chef::Log.info "Creds secret_file didn't exist bag is now #{bag.inspect}"
   end
    
   [:accessID,:accessKey,:email,:password].each do |sym|
+    Chef::Log.info "going through each thing with sym = #{sym}"
     credentials[sym] = bag[sym.to_s] # Chef::DataBagItem 10.28 doesn't work with symbols
   end
     
@@ -52,6 +56,7 @@ else
   end 
 end
 
+Chef::Log.info "Checking if default was overridden"
 #Check to see if the default sumo.conf was overridden
 conf_source = node['sumologic']['conf_template'] || 'sumo.conf.erb'
 
