@@ -5,3 +5,5 @@ metadata
 group :integration do
   cookbook "minitest-handler"
 end
+
+cookbook 'sumologic-collector'
