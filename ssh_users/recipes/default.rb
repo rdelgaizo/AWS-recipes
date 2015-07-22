@@ -1,7 +1,8 @@
 group 'opsworks'
 
 #added into create the new group we need
-Chef::Log.info("Creating groups for instances")
+Chef::Log.warn("Creating groups for instances")
+Chef::Log.error("Something something3")
 create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users
