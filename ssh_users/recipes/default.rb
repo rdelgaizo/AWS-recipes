@@ -1,9 +1,11 @@
 group 'opsworks'
 
 #added into create the new group we need
+Chef::Log.info("Creating groups for instances")
 create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users
+Chef::Log.info("Loaded existing users")
 #existing_ssh_users.each do |id, name|
 #  unless node[:ssh_users][id]
 #    teardown_user(name)
@@ -27,6 +29,7 @@ node[:ssh_users].each_key do |id|
     #add_user_to_default_groups(node[:ssh_users][id])
   end
   set_public_key(node[:ssh_users][id])
+  Chef::Log.info("Adding user to groups: #{node[:ssh_users][id][:name]}")
   add_user_to_default_groups(node[:ssh_users][id])
 end
 
