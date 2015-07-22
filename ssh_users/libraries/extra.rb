@@ -2,11 +2,11 @@ module OpsWorks
   module User
     @@allocated_uids = []
     def create_weddingwire_ng_group
-      group 'weddingwire-ng' do
-        action :create
-        gid '3001'
-        append true
-      end
+      #group 'weddingwire-ng' do
+      #  action :create
+      #  gid '3001'
+      #  append true
+      #end
     end
     def add_user_to_default_groups(params)
       group "www-data" do
