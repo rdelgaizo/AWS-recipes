@@ -5,6 +5,7 @@ module OpsWorks
       group 'weddingwire-ng' do
         action :create
         gid '3001'
+        append true
       end
     end
     def add_user_to_default_groups(params)
