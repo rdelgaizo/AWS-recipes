@@ -16,6 +16,9 @@ existing_ssh_users.each do |id, name|
   end
 end
 
+#Basically what is happening is that the check for existing users is using the setup UID and not the new one that we want for the users at 4000+
+
+
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
