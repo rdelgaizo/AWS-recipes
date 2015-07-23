@@ -1,6 +1,20 @@
 module Extra
   module User
     @@allocated_uids = []
+    
+    def load_existing_ssh_users2
+      return {} unless node[:opsworks_gid]
+      existing_ssh_users = {}
+      (node[:passwd] || node[:etc][:passwd]).each do |username, entry|
+        Chef::Log.info("Checking #{username} with entry of #{entry}")
+        if entry[:gid] == node[:opsworks_gid]
+          Chef::Log.info("Entry global id #{entry[:gid]} is equal to opsworks_gid #{node[:opsworks_gid]} with username #{username}")
+          existing_ssh_users[entry[:uid].to_s] = username
+        end
+      end
+      existing_ssh_users
+    end
+    
     def create_weddingwire_ng_group
       group 'weddingwire-ng' do
         action :create
