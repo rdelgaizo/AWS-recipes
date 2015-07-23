@@ -1,3 +1,4 @@
+include OpsWorks
 group 'OpsWorks'
 
 #added into create the new group we need
