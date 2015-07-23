@@ -8,12 +8,11 @@ create_weddingwire_ng_group
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
+    #Chef::Log.error(node
     Chef::Log.error("Tearing down #{name}")
     teardown_user(name)
   end
 end
-sleep(30)
-Chef::Log.warn("About to check users")
 
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
@@ -30,7 +29,7 @@ node[:ssh_users].each_key do |id|
     node.set[:ssh_users][id][:uid] = new_id
     setup_user(node[:ssh_users][id])
     #added in to set the new users to the groups we want
-    Chef::Log.warn("Adding user for new SSH user")
+    Chef::Log.warn("Adding user for new SSH user #{id}")
     add_user_to_default_groups(node[:ssh_users][id])
   end
   set_public_key(node[:ssh_users][id])
