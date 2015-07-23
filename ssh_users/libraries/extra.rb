@@ -3,7 +3,7 @@ module OpsWorks
     @@allocated_uids = []
     def create_weddingwire_ng_group
       group 'weddingwire-ng' do
-        action :create
+        action :modify
         gid '3001'
       end
     end
