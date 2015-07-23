@@ -9,7 +9,7 @@ existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
   Chef::Log.error("Tearing down #{name}")
-    teardown_user(name)
+    #teardown_user(name)
   end
 end
 
