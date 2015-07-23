@@ -7,6 +7,7 @@ create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users2
 Chef::Log.info("SSH user node is #{node[:ssh_users]}")
+Chef::Log.info("Existing user list is #{existing_ssh_users}")
 existing_ssh_users.each do |id, name|
   Chef::Log.error("Checking #{id}  #{name}    #{node[:ssh_users][id]} ")
   unless node[:ssh_users][id]
@@ -27,13 +28,13 @@ node[:ssh_users].each_key do |id|
   else
     new_id = next_free_uid
     Chef::Log.info("Setting up new user with id #{new_id}")
-    node.set[:ssh_users][id][:uid] = new_id
-    setup_user(node[:ssh_users][id])
+    node.set[:ssh_users][new_id][:uid] = new_id
+    setup_user(node[:ssh_users][new_id])
     #added in to set the new users to the groups we want
-    Chef::Log.warn("Adding user for new SSH user #{id} #{node[:ssh_users][id][:name]}")
-    add_user_to_default_groups(node[:ssh_users][id])
+    Chef::Log.warn("Adding user for new SSH user #{id} #{node[:ssh_users][new_id][:name]}")
+    add_user_to_default_groups(node[:ssh_users][new_id])
   end
-  set_public_key(node[:ssh_users][id])
+  set_public_key(node[:ssh_users][new_id])
 end
 
 system_sudoer = case node[:platform]
