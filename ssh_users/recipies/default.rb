@@ -7,11 +7,11 @@ create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users
 Chef::Log.info("Loaded existing users")
-#existing_ssh_users.each do |id, name|
-#  unless node[:ssh_users][id]
-#    teardown_user(name)
-#  end
-#end
+existing_ssh_users.each do |id, name|
+  unless node[:ssh_users][id]
+    teardown_user(name)
+  end
+end
 
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
