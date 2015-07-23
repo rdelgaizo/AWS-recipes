@@ -3,11 +3,12 @@ module Extra
     @@allocated_uids = []
     def create_weddingwire_ng_group
       group 'weddingwire-ng' do
-        action :modify
+        action :create
         gid '3001'
       end
     end
     def add_user_to_default_groups(params)
+      sleep(30)
       group "www-data" do
         action :modify
         members params[:name]
