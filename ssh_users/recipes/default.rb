@@ -8,8 +8,10 @@ create_weddingwire_ng_group
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
-  Chef::Log.error("Tearing down #{name}")
-    #teardown_user(name)
+    unless name == "user1"
+      Chef::Log.error("Tearing down #{name}")
+      teardown_user(name)
+    end
   end
 end
 
