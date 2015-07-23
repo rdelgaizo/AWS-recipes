@@ -1,4 +1,4 @@
-module OpsWorks
+module extra
   module User
     @@allocated_uids = []
     def create_weddingwire_ng_group
