@@ -13,6 +13,8 @@ existing_ssh_users.each do |id, name|
   end
 end
 sleep(30)
+Chef::Log.warn("About to check users")
+
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
