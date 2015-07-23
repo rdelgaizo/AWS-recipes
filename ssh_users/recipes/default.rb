@@ -1,7 +1,8 @@
 group 'opsworks'
 
 #added into create the new group we need
-#create_weddingwire_ng_group
+Chef::Log.warn("Creating groups")
+create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
@@ -16,7 +17,8 @@ node[:ssh_users].each_key do |id|
       new_id = next_free_uid
       rename_user(existing_ssh_users[id], node[:ssh_users][new_id][:name])
       #added in to set the new users to the groups we want
-      #add_user_to_default_groups(node[:ssh_users][id])
+      Chef::Log.warn("Adding user for exisiting SSH user")
+      add_user_to_default_groups(node[:ssh_users][id])
     end
   else
     new_id = next_free_uid
@@ -24,7 +26,8 @@ node[:ssh_users].each_key do |id|
     node.set[:ssh_users][id][:uid] = new_id
     setup_user(node[:ssh_users][id])
     #added in to set the new users to the groups we want
-    #add_user_to_default_groups(node[:ssh_users][id])
+    Chef::Log.warn("Adding user for new SSH user")
+    add_user_to_default_groups(node[:ssh_users][id])
   end
   set_public_key(node[:ssh_users][id])
 end
