@@ -10,10 +10,9 @@ existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
     Chef::Log.error("Tearing down #{name}")
     teardown_user(name)
-    sleep(30)
   end
 end
-
+sleep(30)
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
