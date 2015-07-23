@@ -34,7 +34,7 @@ node[:ssh_users].each_key do |id|
     Chef::Log.warn("Adding user for new SSH user #{id} #{node[:ssh_users][new_id][:name]}")
     add_user_to_default_groups(node[:ssh_users][new_id])
   end
-  set_public_key(node[:ssh_users][new_id])
+  set_public_key(node[:ssh_users][id])
 end
 
 system_sudoer = case node[:platform]
