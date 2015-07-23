@@ -10,7 +10,7 @@ module Extra
         if entry[:gid] == node[:opsworks_gid]
           Chef::Log.warn("Entry global id #{entry[:gid]} is equal to opsworks_gid #{node[:opsworks_gid]} with username #{username}")
           existing_ssh_users[entry[:uid].to_s] = username #stores as a hash with the user ID pointing to a username
-          Chef::Log.error("Node opsworks_gid is #{node[:opsword_gid]}")
+          Chef::Log.error("Node opsworks_gid is #{node[:opsworks_gid]}")
         end
       end
       existing_ssh_users
