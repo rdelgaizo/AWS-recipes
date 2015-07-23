@@ -1,6 +1,5 @@
 module extra
-  module User
-    @@allocated_uids = []
+  @@allocated_uids = []
     def create_weddingwire_ng_group
       Chef::Log.info("Something something")
       group 'weddingwire-ng' do
@@ -23,7 +22,6 @@ module extra
         append true
       end
     end
-  end
 end
 
 class Chef::Recipe::groups
