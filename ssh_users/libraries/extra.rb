@@ -6,9 +6,9 @@ module Extra
       return {} unless node[:opsworks_gid]
       existing_ssh_users = {}
       (node[:passwd] || node[:etc][:passwd]).each do |username, entry|
-        Chef::Log.info("Checking #{username} with entry of #{entry}")
+        Chef::Log.warn("Checking #{username} with entry of #{entry}")
         if entry[:gid] == node[:opsworks_gid]
-          Chef::Log.info("Entry global id #{entry[:gid]} is equal to opsworks_gid #{node[:opsworks_gid]} with username #{username}")
+          Chef::Log.warn("Entry global id #{entry[:gid]} is equal to opsworks_gid #{node[:opsworks_gid]} with username #{username}")
           existing_ssh_users[entry[:uid].to_s] = username
         end
       end
