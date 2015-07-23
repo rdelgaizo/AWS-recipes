@@ -24,8 +24,8 @@ module Extra
 end
 
 class Chef::Recipe
-  include OpsWorks::User
+  include Extra::User
 end
 class Chef::Resource::User
-  include OpsWorks::User
+  include Extra::User
 end
