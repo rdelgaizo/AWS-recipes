@@ -41,7 +41,7 @@ node[:ssh_users].each_key do |id|
     Chef::Log.warn("Copied node to #{node[:ssh_users][new_id]}")
     Chef::Log.error("New out #{[id]} has #{node[:ssh_users][id]}")
     Chef::Log.info("SSH user node now is #{node[:ssh_users]}")
-    Chef::Log.warn("Adding user for new SSH user #{new_id}   #{id} #{node[:ssh_users][new_id][:name]}")
+    #Chef::Log.warn("Adding user for new SSH user #{new_id}   #{id} #{node[:ssh_users][new_id][:name]}")
     add_user_to_default_groups(node[:ssh_users][id])
     #set_public_key(node[:ssh_users][new_id])
   end
