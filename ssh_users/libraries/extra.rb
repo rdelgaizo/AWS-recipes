@@ -5,6 +5,7 @@ module Extra
     def load_existing_ssh_users2
       return {} unless node[:opsworks_gid]
       existing_ssh_users = {}
+      
       (node[:passwd] || node[:etc][:passwd]).each do |username, entry|
         #Chef::Log.error("Checking #{username} with entry of #{entry} and u_entry that gets logged as #{entry[:uid]}")
         if entry[:gid] == node[:opsworks_gid]
@@ -15,6 +16,25 @@ module Extra
       end
       existing_ssh_users
     end
+    
+    def kill_user_processes2(name)
+      Chef::Log.info("Killing all processes of user #{name}")
+      execute "kill all processes of user #{name}" do
+        command "pkill -u #{name}; true"
+      end
+    end
+
+    def teardown_user2(name)
+      Chef::Log.info("tearing down user #{name}")
+      kill_user_processes2(name)
+
+      user name do
+        action :remove
+        supports :manage_home => true
+      end
+    end
+    
+    
     
     def create_weddingwire_ng_group
       group 'weddingwire-ng' do
