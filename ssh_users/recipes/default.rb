@@ -10,7 +10,7 @@ Chef::Log.info("SSH user node at start is #{node[:ssh_users]}")
 Chef::Log.info("Existing user list is #{existing_ssh_users}")
 existing_ssh_users.each do |id, name|
   Chef::Log.error("Checking #{id}  #{name}    #{node[:ssh_users][id]} ")
-  unless node[:ssh_users][id] || 
+  unless node[:ssh_users][id]
     Chef::Log.info("Tearing down #{name} #{id}")
     teardown_user2(name)
     Chef::Log.warn("Done tearing")
