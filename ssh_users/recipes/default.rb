@@ -48,6 +48,9 @@ node[:ssh_users].each_key do |id|
   #set_public_key(node[:ssh_users][id])
 end
 
+Chef::Log.error("SSH user node after everything is #{node[:ssh_users]}")
+
+
 system_sudoer = case node[:platform]
                 when 'debian'
                   'admin'
