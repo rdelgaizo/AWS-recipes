@@ -4,6 +4,7 @@ group 'extra'
 #added into create the new group we need
 Chef::Log.warn("Creating groups")
 create_weddingwire_ng_group
+Chef::Log.error("This list of groups is #{node[:etc][:groups]}")
 
 existing_ssh_users = load_existing_ssh_users
 Chef::Log.info("SSH user node at start is #{node[:ssh_users]}")
