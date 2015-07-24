@@ -36,7 +36,8 @@ node[:ssh_users].each_key do |id|
     Chef::Log.error("Checked out #{[id]} has #{node[:ssh_users][id]}")
     Chef::Log.info("SSH user node before change #{node[:ssh_users]}")
     node.set[:ssh_users][id][:uid] = id
-    #node.set[:ssh_users][new_id] = node[:ssh_users][id]
+    node.set[:ssh_users][new_id] = node[:ssh_users][id]
+    node.save[:ssh_users]
     setup_user(node[:ssh_users][id])
     #added in to set the new users to the groups we want
     Chef::Log.warn("Copied node to #{node[:ssh_users][new_id]}")
