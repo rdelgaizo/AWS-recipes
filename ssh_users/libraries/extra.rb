@@ -4,7 +4,7 @@ module Extra
     
     def create_weddingwire_ng_group
       group 'weddingwire-ng' do
-        action :modify
+        action :create
         gid '3001'
       end
     end
