@@ -1,4 +1,4 @@
-module Extra
+module opsworks
   module User
     @@allocated_uids = []
     
@@ -25,8 +25,8 @@ module Extra
 end
 
 class Chef::Recipe
-  include Extra::User
+  include OpsWorks::User
 end
 class Chef::Resource::User
-  include Extra::User
+  include OpsWorks::User
 end
