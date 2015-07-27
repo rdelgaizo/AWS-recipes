@@ -6,6 +6,7 @@ module Extra
       group 'weddingwire-ng' do
         action :create
         gid '3001'
+        only_if node[:etc][:group]["weddingwire-ng"].nil?
       end
       Chef::Log.warn("created weddingwire-ng group")
     end
