@@ -1,5 +1,4 @@
 group 'opsworks'
-group 'extra'
 
 #added into create the new group we need
 Chef::Log.warn("Creating groups")
