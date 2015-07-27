@@ -3,7 +3,7 @@ group 'extra'
 
 #added into create the new group we need
 Chef::Log.warn("Creating groups")
-#create_weddingwire_ng_group
+create_weddingwire_ng_group
 Chef::Log.error("Groups are #{node[:etc][:group]}")
 Chef::Log.info("Weddingwire-ng group is #{node[:etc][:group]["weddingwire-ng"]}")
 unless node[:etc][:group]["weddingwire-ng"].nil?
