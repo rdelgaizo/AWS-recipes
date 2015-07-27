@@ -6,12 +6,9 @@ module Extra
       group 'weddingwire-ng' do
         action :create
         gid '3001'
-        only_if node[:etc][:group]["weddingwire-ng"].nil?
       end
-      Chef::Log.warn("created weddingwire-ng group")
     end
     def add_user_to_default_groups(params)
-      Chef::Log.error("Add user #{params[:name]} to groups")
       group "www-data" do
         action :modify
         members params[:name]
