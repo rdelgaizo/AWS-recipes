@@ -4,6 +4,8 @@ group 'extra'
 #added into create the new group we need
 Chef::Log.warn("Creating groups")
 #create_weddingwire_ng_group
+Chef::Log.error("Groups are #{node[:etc][:group]}")
+
 
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
@@ -14,11 +16,8 @@ end
 
 node[:ssh_users].each_key do |id|
   if existing_ssh_users.has_key?(id)
-    Chef::Log.error("User #{id} has existing key")
     unless existing_ssh_users[id] == node[:ssh_users][id][:name]
-      Chef::Log.warn("Renaming user")
       rename_user(existing_ssh_users[id], node[:ssh_users][id][:name])
-      Chef::Log.warn("This user exists already #{node[:ssh_users][id][name]}")
       #added in to set the new users to the groups we want
       add_user_to_default_groups(node[:ssh_users][id])
     end
