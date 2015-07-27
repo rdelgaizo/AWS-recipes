@@ -3,7 +3,7 @@ group 'extra'
 
 #added into create the new group we need
 Chef::Log.warn("Creating groups")
-create_weddingwire_ng_group
+#create_weddingwire_ng_group
 
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
