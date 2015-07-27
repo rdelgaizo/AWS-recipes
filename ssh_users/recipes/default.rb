@@ -5,6 +5,10 @@ group 'extra'
 Chef::Log.warn("Creating groups")
 #create_weddingwire_ng_group
 Chef::Log.error("Groups are #{node[:etc][:group]}")
+Chef::Log.info("Weddingwire-ng group is #{node[:etc][:group]["weddingwire-ng"]}")
+unless node[:etc][:group]["weddingwire-ng"].nil?
+  Chef::Log.warn("Weddingwire-ng group is not nil")
+end
 
 
 existing_ssh_users = load_existing_ssh_users
