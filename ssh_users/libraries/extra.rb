@@ -25,8 +25,8 @@ module opsworks
 end
 
 class Chef::Recipe
-  include OpsWorks::User
+  include opsworks::User
 end
 class Chef::Resource::User
-  include OpsWorks::User
+  include opsworks::User
 end
