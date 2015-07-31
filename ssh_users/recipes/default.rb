@@ -1,8 +1,5 @@
 group 'opsworks'
 
-#added into create the new group if we need it
-create_weddingwire_ng_group if node[:etc][:group]["weddingwire-ng"].nil?
-
 existing_ssh_users = load_existing_ssh_users
 existing_ssh_users.each do |id, name|
   unless node[:ssh_users][id]
